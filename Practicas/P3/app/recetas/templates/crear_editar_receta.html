@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+
+{%if edito%}
+
+<form method="POST" class="post-form" novalidate enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-group">
+    {{form.nombre.label_tag}}
+    {{form.nombre}}
+    {{form.errors.nombre}}
+  </div>
+
+  <div class="form-group">
+    {{form.preparación.label_tag}}
+    {{form.preparación}}
+    {{form.errors.preparación}}
+  </div>
+
+  <hr class="mb-2">
+  <div class="col">
+      <input name="recetaform" type="submit" value="Editar receta" class="btn btn-success float-right">
+  </div>
+</form>
+
+
+<form method="POST" class="post-form" novalidate enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-group">
+    {{form2.foto.label_tag}}
+    {{form2.foto}}
+    {{form2.errors.foto}}
+  </div>
+
+  <select name="receta" class="form-control" required="" id="id_receta">
+    <option value="{{receta.id}}" selected="">{{receta}}</option>
+  </select>
+
+  <hr class="mb-2">
+  <div class="col">
+      <input name="fotoform" type="submit" value="Editar foto" class="btn btn-success float-right">
+  </div>
+
+  {%if fotos%}
+
+  <table class="table">
+    <thead>
+        <tr>
+            <th>Nombre del archivo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for foto in fotos %}
+        <tr>
+            <td>{{foto.foto}}</td>
+            
+            <td class="text-right py-0 align-middle">
+                <div class="btn-group btn-group-sm">
+                    <a title="Ver archivo" target="_blank" href="/media/{{foto.foto}}"
+                        class="btn btn-info">Ver</a>
+                    <a title="Eliminar archivo" href="/borrar_foto/{{foto.id}}"
+                        class="btn btn-danger"
+                        onClick="return confirm('¿Seguro que quieres borrar el archivo {{foto.foto}}?');">Eliminar</a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+  {%endif%}
+
+</form>
+
+
+{% else %}
+<form method="POST" class="post-form" novalidate enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-group">
+    {{form.nombre.label_tag}}
+    {{form.nombre}}
+    {{form.errors.nombre}}
+  </div>
+
+  <div class="form-group">
+    {{form.preparación.label_tag}}
+    {{form.preparación}}
+    {{form.errors.preparación}}
+  </div>
+
+  <hr class="mb-2">
+  <div class="col">
+      <input name="recetaform" type="submit" value="Crear" class="btn btn-success float-right">
+  </div>
+</form>
+
+{% endif %}
+
+{% endblock %}

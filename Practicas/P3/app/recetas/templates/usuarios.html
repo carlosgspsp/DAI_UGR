@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block tittle %}Usuarios{% endblock %}
+
+{% block main %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Username</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for usuario in usuarios %}
+    <tr>
+      <td>{{usuario.username}}</td>
+      <td> 
+          <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" href="/borrar_usuario/{{usuario.id}}">
+              <i class="fas fa-folder"></i>
+              Borrar
+          </a>
+      </td>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion de eliminacion</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ¿Esta seguro de que quiere eliminar esta usuario?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <a href="/borrar_usuario/{{usuario.id}}" class="btn btn-warning">Confirmar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {%endfor%}
+    </tr>
+  </tbody>
+</table>
+
+<div class="col-md-12 text-center">
+  <a class="btn btn-success btn-sm" href="{% url 'register' %}">
+      <i class="fas fa-folder"></i>
+      Registrar nuevo usuario
+  </a> 
+</div>
+
+{% endblock %}

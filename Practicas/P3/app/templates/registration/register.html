@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block tittle %}{{titulo}}{% endblock %}
+
+{% block main %}
+        <form method="post">
+          {% csrf_token %}
+          {{form.as_p}}
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" id="submit" class="btn btn-primary btn-block">Registrar</button>
+            </div>
+          </div>
+        </form>
+{% endblock %}

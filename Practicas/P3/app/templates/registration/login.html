@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block tittle %}{{titulo}}{% endblock %}
+
+{% block main %}
+
+<p class="login-box-msg">Introduce el email y contraseña proporcionado</p>
+        <form method="post">
+          {% csrf_token %}
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Usuario" name="username">
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Password" name="password">
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" id="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+            </div>
+          </div>
+        </form>
+{% endblock %}

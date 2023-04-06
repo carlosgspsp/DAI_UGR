@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block tittle %}Receta: {{receta.nombre}}{% endblock %}
+
+{% block main %}
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 fw-normal">{{receta.nombre}}</h1>
+  <p class="fs-5 text-muted">{{receta.preparación}}</p>
+</div>
+<h2 class="display-6 text-center mb-4">Ingredientes</h2>
+<div class="table-responsive">
+  <table class="table text-center">
+    <thead>
+      <tr>
+        <th style="width: 34%;">Nombre</th> 
+        <th style="width: 34%;">Cantidad</th>
+        <th style="width: 34%;">Unidades</th> 
+      </tr>
+    </thead>
+    <tbody>
+      {% for ingrediente in ingredientes %}
+      <tr>
+        <td>{{ingrediente.nombre}}</td>
+        <td>{{ingrediente.cantidad}}</td>
+        <td>{{ingrediente.unidades}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+  {% for foto in fotos %}
+  <div class="col">
+    <div class="card mb-4 rounded-3 shadow-sm">
+      <div class="card-header py-3">
+        <h4 class="my-0 fw-normal">{{foto.foto}}</h4>
+      </div>
+      <div class="card-body">
+        <img height="200" width="200" title="dashboard" src="/media/{{foto.foto}}" alt="Logo ORI"
+          class="brand-image img-circle elevation-3" style="opacity: .8">
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
